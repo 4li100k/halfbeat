@@ -10,5 +10,5 @@ python hb_pydub.py
 #### to package the program into a single executable
 ```
 pip install pyinstaller
-pyinstaller --onefile hb_pydub.py
+pyinstaller hb_pydub.py -F
 ```

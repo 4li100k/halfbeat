@@ -13,21 +13,11 @@ else:
     print("not a supported file")
     raise SystemExit(0)
 sr = 1000
-bpm = int(input("Enter the BPM of the audio file: "))
-usek = (60/bpm)*sr
-print("usek length: " + str(usek))
-pocet_usekov = round(song.duration_seconds*sr/usek)
-print("Processing...")
-newsong1 = AudioSegment.empty()
-newsong2 = AudioSegment.empty()
-for i in range(pocet_usekov):
-    if (i % 2) == 0 and i != 0:
-        newsong1 = newsong1 + song[round((i-1)*usek):round(i*usek)]
-    else:
-        newsong2 = newsong2 + song[round((i-1)*usek):round(i*usek)]
+ratio = float(input("Enter the desired speed ratio: [1.3]") or 1.3)
 output_folder = "./output"
 if not os.path.exists(output_folder):
     os.mkdir(output_folder)
 filename = filepath.split("/")[-1].split(".")[0]
-newsong1.export(output_folder + "/hb_" + filename + "a." + format, format = format)
-newsong2.export(output_folder + "/hb_" + filename + "b." + format, format = format)
+newsong = song._spawn(song.raw_data, overrides={"frame_rate": int(song.frame_rate * ratio)})
+newsong = newsong.set_frame_rate(song.frame_rate)
+newsong.export(output_folder + "/nc_" + filename + "_x" + str(ratio) +  "." + format, format = format)
