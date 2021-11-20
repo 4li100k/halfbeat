@@ -1,5 +1,3 @@
-# pyinstaller --onefile hb_pydub.py
-
 from pydub import AudioSegment
 import os #for creating the output folder
 from tkinter import Tk     # from tkinter import Tk for Python 3.x
