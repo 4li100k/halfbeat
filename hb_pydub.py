@@ -23,7 +23,7 @@ newsong2 = AudioSegment.empty()
 for i in range(pocet_usekov):
     if (i % 2) == 0 and i != 0:
         newsong1 = newsong1 + song[round((i-1)*usek):round(i*usek)]
-    else:
+    else:   
         newsong2 = newsong2 + song[round((i-1)*usek):round(i*usek)]
 output_folder = "./output"
 if not os.path.exists(output_folder):
